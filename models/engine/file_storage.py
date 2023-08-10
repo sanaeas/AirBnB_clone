@@ -40,7 +40,7 @@ class FileStorage:
             json.dump(obj_dict, file)
 
     def reload(self):
-        """Deserializes instances from JSON and populates the dictionary of objects"""
+        """Deserializes instances from JSON and populates the dict of object"""
         try:
             with open(self.__file_path, 'r', encoding='UTF-8') as file:
                 obj_dict = json.load(file)
