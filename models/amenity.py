@@ -8,4 +8,4 @@ from models.base_model import BaseModel
 
 class Amenity(BaseModel):
     """A class representing an amenity in the AirBnB clone project"""
-    name = '
+    name = ''
