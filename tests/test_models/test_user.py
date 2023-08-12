@@ -5,6 +5,7 @@ import unittest
 from models.user import User
 from datetime import datetime
 
+
 class TestUser(unittest.TestCase):
 
     def setUp(self):
@@ -23,8 +24,9 @@ class TestUser(unittest.TestCase):
         self.assertIsInstance(self.user.updated_at, datetime)
 
     def test_user_str_representation(self):
-        expected_str = "[User] ({}) {}".format(self.user.id, self.user.__dict__)
+        expected_str = f"[User] ({self.user.id}) {self.user.__dict__}"
         self.assertEqual(str(self.user), expected_str)
+
 
 if __name__ == '__main__':
     unittest.main()

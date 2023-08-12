@@ -31,8 +31,9 @@ class TestPlace(unittest.TestCase):
         self.assertIsInstance(self.place.updated_at, datetime)
 
     def test_place_str_representation(self):
-        expected_str = "[Place] ({}) {}".format(self.place.id, self.place.__dict__)
+        expected_str = f"[Place] ({self.place.id}) {self.place.__dict__}"
         self.assertEqual(str(self.place), expected_str)
+
 
 if __name__ == '__main__':
     unittest.main()

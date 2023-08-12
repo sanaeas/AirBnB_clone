@@ -41,19 +41,24 @@ class TestBaseModel(unittest.TestCase):
         dict_repr = self.base_model.to_dict()
         datetime_format = '%Y-%m-%dT%H:%M:%S.%f'
         self.assertEqual(
-            dict_repr['created_at'], self.base_model.created_at.strftime(datetime_format))
+            dict_repr['created_at'],
+            self.base_model.created_at.strftime(datetime_format))
         self.assertEqual(
-            dict_repr['updated_at'], self.base_model.updated_at.strftime(datetime_format))
+            dict_repr['updated_at'],
+            self.base_model.updated_at.strftime(datetime_format))
 
     def test_to_dict_attributes_are_correct(self):
         self.base_model_dict = self.base_model.to_dict()
         self.assertEqual(self.base_model_dict['id'], self.base_model.id)
-        self.assertEqual(self.base_model_dict['created_at'], self.base_model.created_at.isoformat())
-        self.assertEqual(self.base_model_dict['updated_at'], self.base_model.updated_at.isoformat())
+        self.assertEqual(self.base_model_dict['created_at'],
+                         self.base_model.created_at.isoformat())
+        self.assertEqual(self.base_model_dict['updated_at'],
+                         self.base_model.updated_at.isoformat())
         self.assertEqual(self.base_model_dict['__class__'], 'BaseModel')
 
     def test_str_representation(self):
-        expected_str = f"[BaseModel] ({self.base_model.id}) {self.base_model.__dict__}"
+        expected_str = f"[BaseModel] ({self.base_model.id}) \
+{self.base_model.__dict__}"
         self.assertEqual(str(self.base_model), expected_str)
 
 

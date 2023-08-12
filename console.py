@@ -40,7 +40,7 @@ class HBNBCommand(cmd.Cmd):
         """Exit the program"""
         print('')
         return True
-    
+
     def emptyline(self):
         """Do nothing when receiving an empty line."""
         pass
