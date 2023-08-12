@@ -40,6 +40,10 @@ class HBNBCommand(cmd.Cmd):
         """Exit the program"""
         print('')
         return True
+    
+    def emptyline(self):
+        """Do nothing when receiving an empty line."""
+        pass
 
     def do_create(self, arg):
         """Create a new instance of the specified class and save it"""
@@ -62,7 +66,7 @@ class HBNBCommand(cmd.Cmd):
         elif len(args) == 1:
             print('** instance id missing **')
         else:
-            inst_key = "{}.{}".format(args[0], args[1])
+            inst_key = "{}.{}".format(args[0], args[1].strip('"'))
             if inst_key in storage.all():
                 print(storage.all()[inst_key])
             else:
@@ -78,7 +82,7 @@ class HBNBCommand(cmd.Cmd):
         elif len(args) == 1:
             print('** instance id missing **')
         else:
-            inst_key = "{}.{}".format(args[0], args[1])
+            inst_key = "{}.{}".format(args[0], args[1].strip('"'))
             if inst_key in storage.all():
                 del storage.all()[inst_key]
                 storage.save()
@@ -111,7 +115,7 @@ class HBNBCommand(cmd.Cmd):
         elif len(args) == 1:
             print('** instance id missing **')
             return
-        instance_key = "{}.{}".format(args[0], args[1])
+        instance_key = "{}.{}".format(args[0], args[1].strip('"'))
         if instance_key not in storage.all():
             print('** no instance found **')
             return
@@ -124,6 +128,37 @@ class HBNBCommand(cmd.Cmd):
         instance = storage.all()[instance_key]
         setattr(instance, args[2], args[3])
         instance.save()
+
+    def do_count(self, arg):
+        """Count the number of instances of a class"""
+        args = arg.split()
+        if len(args) == 0:
+            print('** class name missing **')
+        elif args[0] not in HBNBCommand.classes:
+            print('** class doesn\'t exist **')
+        else:
+            class_name = args[0]
+            count = 0
+            for instance in storage.all().values():
+                if instance.__class__.__name__ == class_name:
+                    count += 1
+            print(count)
+
+    def default(self, arg):
+        commands = ['all', 'count', 'show', 'destroy', 'update']
+        if '.' in arg and '(' in arg and ')' in arg:
+            cls_cmd = arg.split('.')
+            cmd_args = cls_cmd[1].split('(')
+            cmd_args[1] = cmd_args[1].replace("'", '"')
+            args = cmd_args[1].split(')')
+
+            cls_name = cls_cmd[0]
+            cmd_name = cmd_args[0]
+
+            if cls_name in HBNBCommand.classes \
+                    and cmd_name in commands:
+                arg = f"{cmd_name} {cls_name} {args[0].replace(',', '')}"
+        return arg
 
 
 if __name__ == '__main__':
