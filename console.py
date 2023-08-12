@@ -110,9 +110,11 @@ class HBNBCommand(cmd.Cmd):
         args = shlex.split(arg)
         if len(args) == 0:
             print('** class name missing **')
-        elif args[0] not in HBNBCommand.classes:
+            return
+        if args[0] not in HBNBCommand.classes:
             print('** class doesn\'t exist **')
-        elif len(args) == 1:
+            return
+        if len(args) == 1:
             print('** instance id missing **')
             return
         instance_key = "{}.{}".format(args[0], args[1].strip('"'))
