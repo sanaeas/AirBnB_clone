@@ -144,7 +144,7 @@ class HBNBCommand(cmd.Cmd):
                     count += 1
             print(count)
 
-    def default(self, arg):
+    def precmd(self, arg):
         commands = ['all', 'count', 'show', 'destroy', 'update']
         if '.' in arg and '(' in arg and ')' in arg:
             cls_cmd = arg.split('.')
@@ -155,8 +155,7 @@ class HBNBCommand(cmd.Cmd):
             cls_name = cls_cmd[0]
             cmd_name = cmd_args[0]
 
-            if cls_name in HBNBCommand.classes \
-                    and cmd_name in commands:
+            if cmd_name in commands:
                 arg = f"{cmd_name} {cls_name} {args[0].replace(',', '')}"
         return arg
 
