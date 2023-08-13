@@ -8,6 +8,7 @@ from io import StringIO
 from unittest.mock import patch
 from console import HBNBCommand
 
+
 class TestHBNBCommand(unittest.TestCase):
 
     def setUp(self):
@@ -130,7 +131,7 @@ and save changes to storage\n"
             self.assertFalse(HBNBCommand().onecmd("destroy BaseModel 123"))
             self.assertEqual("** no instance found **\n",
                              f.getvalue())
-            
+
     def test_all(self):
         with patch('sys.stdout', new=StringIO()) as f:
             self.assertFalse(HBNBCommand().onecmd("all MyModel"))

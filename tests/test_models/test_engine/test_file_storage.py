@@ -42,7 +42,7 @@ class TestFileStorage(unittest.TestCase):
         self.assertEqual(reloaded_object.to_dict(), self.base_model.to_dict())
 
     def test_reloaded_object_created_at_equals_original(self):
-        """Test if the reloaded object's created_at matches the original object's"""
+        """Test if the reloaded object's created_at matches the original obj"""
         key = self.base_model.__class__.__name__ + \
             '.' + str(self.base_model_id)
 
