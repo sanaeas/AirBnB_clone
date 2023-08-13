@@ -27,6 +27,22 @@ class TestReview(unittest.TestCase):
             self.review.id, self.review.__dict__)
         self.assertEqual(str(self.review), expected_str)
 
+    def test_create_review(self):
+        self.review.place_id = 'abdc-1234'
+        self.review.user_id = 'efgh-4321'
+        self.review.text = 'Amazing'
+
+        review_dict = self.review.to_dict()
+
+        self.assertEqual(self.review.place_id, review_dict['place_id'])
+        self.assertEqual(self.review.user_id, review_dict['user_id'])
+        self.assertEqual(self.review.text, review_dict['text'])
+
+        self.review.text = 'Beautiful'
+        self.assertNotEqual(self.review.text, review_dict['text'])
+        review_dict = self.review.to_dict()
+        self.assertEqual(self.review.text, review_dict['text'])
+
 
 if __name__ == '__main__':
     unittest.main()

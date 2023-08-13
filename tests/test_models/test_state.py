@@ -25,6 +25,18 @@ class TestState(unittest.TestCase):
             self.state.id, self.state.__dict__)
         self.assertEqual(str(self.state), expected_str)
 
+    def test_create_state(self):
+        self.state.name = 'Florida'
+
+        state_dict = self.state.to_dict()
+
+        self.assertEqual(self.state.name, state_dict['name'])
+
+        self.state.name = 'Foo'
+        self.assertNotEqual(self.state.name, state_dict['name'])
+        state_dict = self.state.to_dict()
+        self.assertEqual(self.state.name, state_dict['name'])
+
 
 if __name__ == '__main__':
     unittest.main()

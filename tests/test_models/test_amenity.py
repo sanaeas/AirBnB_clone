@@ -25,6 +25,18 @@ class TestAmenity(unittest.TestCase):
             self.amenity.id, self.amenity.__dict__)
         self.assertEqual(str(self.amenity), expected_str)
 
+    def test_create_amenity(self):
+        self.amenity.name = 'WiFi'
+
+        amenity_dict = self.amenity.to_dict()
+
+        self.assertEqual(self.amenity.name, amenity_dict['name'])
+
+        self.amenity.name = 'swimming pool'
+        self.assertNotEqual(self.amenity.name, amenity_dict['name'])
+        amenity_dict = self.amenity.to_dict()
+        self.assertEqual(self.amenity.name, amenity_dict['name'])
+
 
 if __name__ == '__main__':
     unittest.main()

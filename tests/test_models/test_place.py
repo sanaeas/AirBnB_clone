@@ -34,6 +34,24 @@ class TestPlace(unittest.TestCase):
         expected_str = f"[Place] ({self.place.id}) {self.place.__dict__}"
         self.assertEqual(str(self.place), expected_str)
 
+    def test_create_place(self):
+        self.place.city_id = 'abdd-0987'
+        self.place.name = '221B'
+        self.place.number_rooms = 1
+        self.place.max_guest = 2
+
+        place_dict = self.place.to_dict()
+
+        self.assertEqual(self.place.city_id, place_dict['city_id'])
+        self.assertEqual(self.place.name, place_dict['name'])
+        self.assertEqual(self.place.number_rooms, place_dict['number_rooms'])
+        self.assertEqual(self.place.max_guest, place_dict['max_guest'])
+
+        self.place.name = 'SH'
+        self.assertNotEqual(self.place.name, place_dict['name'])
+        place_dict = self.place.to_dict()
+        self.assertEqual(self.place.name, place_dict['name'])
+
 
 if __name__ == '__main__':
     unittest.main()

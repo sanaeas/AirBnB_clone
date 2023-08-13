@@ -25,6 +25,20 @@ class TestCity(unittest.TestCase):
         expected_str = "[City] ({}) {}".format(
             self.city.id, self.city.__dict__)
         self.assertEqual(str(self.city), expected_str)
+    
+    def test_create_city(self):
+        self.city.state_id = 'sdfg-0912'
+        self.city.name = 'LA'
+
+        city_dict = self.city.to_dict()
+
+        self.assertEqual(self.city.state_id, city_dict['state_id'])
+        self.assertEqual(self.city.name, city_dict['name'])
+
+        self.city.name = 'NY'
+        self.assertNotEqual(self.city.name, city_dict['name'])
+        city_dict = self.city.to_dict()
+        self.assertEqual(self.city.name, city_dict['name'])
 
 
 if __name__ == '__main__':
