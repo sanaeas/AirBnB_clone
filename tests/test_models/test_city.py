@@ -4,9 +4,31 @@
 import unittest
 from models.city import City
 from datetime import datetime
+import models
 
 
 class TestCity(unittest.TestCase):
+
+    def test_instantiation(self):
+        self.assertEqual(City, type(City()))
+
+    def test_instance_stored_in_objects(self):
+        self.assertIn(City(), models.storage.all().values())
+
+    def test_id_type(self):
+        self.assertEqual(str, type(City().id))
+
+    def test_created_at_type(self):
+        self.assertEqual(datetime, type(City().created_at))
+
+    def test_updated_at_type(self):
+        self.assertEqual(datetime, type(City().updated_at))
+
+    def test_name_type(self):
+        self.assertEqual(str, type(City.name))
+
+    def test_state_id_type(self):
+        self.assertEqual(str, type(City.state_id))
 
     def setUp(self):
         self.city = City()
@@ -25,7 +47,7 @@ class TestCity(unittest.TestCase):
         expected_str = "[City] ({}) {}".format(
             self.city.id, self.city.__dict__)
         self.assertEqual(str(self.city), expected_str)
-    
+
     def test_create_city(self):
         self.city.state_id = 'sdfg-0912'
         self.city.name = 'LA'

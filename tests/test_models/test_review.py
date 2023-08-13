@@ -4,9 +4,34 @@
 import unittest
 from models.review import Review
 from datetime import datetime
+import models
 
 
 class TestReview(unittest.TestCase):
+
+    def test_instantiation(self):
+        self.assertEqual(Review, type(Review()))
+
+    def test_instance_stored_in_objects(self):
+        self.assertIn(Review(), models.storage.all().values())
+
+    def test_id_type(self):
+        self.assertEqual(str, type(Review().id))
+
+    def test_created_at_type(self):
+        self.assertEqual(datetime, type(Review().created_at))
+
+    def test_updated_at_type(self):
+        self.assertEqual(datetime, type(Review().updated_at))
+
+    def test_place_id_type(self):
+        self.assertEqual(str, type(Review.place_id))
+
+    def test_user_id_type(self):
+        self.assertEqual(str, type(Review.user_id))
+
+    def test_text_type(self):
+        self.assertEqual(str, type(Review.text))
 
     def setUp(self):
         self.review = Review()

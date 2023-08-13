@@ -4,9 +4,58 @@
 import unittest
 from models.place import Place
 from datetime import datetime
+import models
 
 
 class TestPlace(unittest.TestCase):
+
+    def test_instantiation(self):
+        self.assertEqual(Place, type(Place()))
+
+    def test_instance_stored_in_objects(self):
+        self.assertIn(Place(), models.storage.all().values())
+
+    def test_id_type(self):
+        self.assertEqual(str, type(Place().id))
+
+    def test_created_at_type(self):
+        self.assertEqual(datetime, type(Place().created_at))
+
+    def test_updated_at_type(self):
+        self.assertEqual(datetime, type(Place().updated_at))
+
+    def test_city_id_type(self):
+        self.assertEqual(str, type(Place.city_id))
+
+    def test_user_id_type(self):
+        self.assertEqual(str, type(Place.user_id))
+
+    def test_name_type(self):
+        self.assertEqual(str, type(Place.name))
+
+    def test_description_type(self):
+        self.assertEqual(str, type(Place.description))
+
+    def test_number_rooms_type(self):
+        self.assertEqual(int, type(Place.number_rooms))
+
+    def test_number_bathrooms_type(self):
+        self.assertEqual(int, type(Place.number_bathrooms))
+
+    def test_max_guest_type(self):
+        self.assertEqual(int, type(Place.max_guest))
+
+    def test_price_by_night_type(self):
+        self.assertEqual(int, type(Place.price_by_night))
+
+    def test_latitude_type(self):
+        self.assertEqual(float, type(Place.latitude))
+
+    def test_longitude_type(self):
+        self.assertEqual(float, type(Place.longitude))
+
+    def test_amenity_ids_type(self):
+        self.assertEqual(list, type(Place.amenity_ids))
 
     def setUp(self):
         self.place = Place()

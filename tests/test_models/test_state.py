@@ -4,9 +4,28 @@
 import unittest
 from models.state import State
 from datetime import datetime
+import models
 
 
 class TestState(unittest.TestCase):
+
+    def test_instantiation(self):
+        self.assertEqual(State, type(State()))
+
+    def test_instance_stored_in_objects(self):
+        self.assertIn(State(), models.storage.all().values())
+
+    def test_id_type(self):
+        self.assertEqual(str, type(State().id))
+
+    def test_created_at_type(self):
+        self.assertEqual(datetime, type(State().created_at))
+
+    def test_updated_at_type(self):
+        self.assertEqual(datetime, type(State().updated_at))
+
+    def test_name_type(self):
+        self.assertEqual(str, type(State.name))
 
     def setUp(self):
         self.state = State()
